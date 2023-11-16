@@ -1,0 +1,24 @@
+Importance Sampling is a variance reduction technique used in Monte Carlo simulation methods. The main idea behind importance sampling is to sample from a distribution that is "closer" to the target function you are integrating, to reduce the variance of the estimator and possibly require fewer samples to achieve a desired accuracy.
+
+In the context of the code you've provided, the goal seems to be to estimate the integral of a function f(x) which is exp(-x) / (1 + x^2) over some interval, likely [0, 1] given the use of runif to generate uniform random samples. This function is not easy to integrate directly due to the combination of exponential and quadratic terms.
+
+The code defines two proposal distributions, phi1 and phi2, each with a corresponding inverse cumulative distribution function (inv_cdf_phi1 and inv_cdf_phi2). These are used to generate samples that are more frequent in the regions where f(x) is larger, which is the essence of importance sampling.
+
+Here's what each part does:
+
+phi1(x) is a probability density function (PDF) proportional to exp(-x) over the interval [0, 1].
+inv_cdf_phi1(u) is the inverse of the cumulative distribution function (CDF) corresponding to phi1. It transforms uniform random numbers u into samples from phi1.
+phi2(x) is the PDF of the standard Cauchy distribution, which is heavy-tailed and can be useful when the function f has heavy tails.
+inv_cdf_phi2(u) is the inverse of the CDF for the standard Cauchy distribution, transforming uniform random samples into samples from phi2.
+The importance_sampling function works as follows:
+
+Generate N uniform random samples (samples).
+Transform these uniform samples into samples from the proposal distribution using inv_cdf.
+Evaluate f(x) at these samples.
+Weight the evaluation of f(x) by the ratio f(x) / phi(x) to correct for the fact that we sampled from phi rather than the uniform distribution over [0, 1].
+Take the average of these weighted evaluations to estimate the integral of f.
+The naive_monte_carlo function is a basic Monte Carlo estimator that doesn't use importance sampling. It simply evaluates f(x) at uniform random samples and takes the average.
+
+Finally, the code runs these functions and prints the result of importance sampling using both proposal distributions phi1 and phi2, and compares it with the naive Monte Carlo estimator.
+
+By using importance sampling, you hope to get an estimate of the integral with lower variance than what would be obtained with naive Monte Carlo, especially if f(x) has regions of high variance that are better captured by the chosen proposal distributions phi1 and phi2.
