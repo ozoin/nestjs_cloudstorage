@@ -30,6 +30,7 @@
 
 ```bash
 $ npm install
+Go to swagger [path]/swagger
 ```
 
 ## Running the app
