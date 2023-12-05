@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -26,16 +26,27 @@ export class UsersService {
     });
   }
 
-  create(dto: CreateUserDto) {
-    const {email,fullName,password} = dto;
-    bcrypt.hash(password,5, (err,hashedPassword) => {
-      if (err) {
-        console.log(err)
-      } else {
-        const updatedUser = {email,fullName,password:hashedPassword};
-        return this.repository.save(updatedUser);
-      }
-    });
-    // return this.repository.save(dto);
+  async deleteAll() {
+    const allUsers = await this.repository.find();
+    if (allUsers.length > 0) {
+      allUsers.map(async (user) => {
+        const { id } = user;
+        await this.repository.delete({ id: id });
+      });
+    } else {
+      throw new Error('Database is clear');
+    }
+    return this.repository.find();
+  }
+
+  async create(dto: CreateUserDto) {
+    const { email, fullName, password } = dto;
+    try {
+      const hashedPassword = await bcrypt.hash(password, 5);
+      const updatedUser = { email, fullName, password: hashedPassword };
+      return await this.repository.save(updatedUser);
+    } catch (err) {
+      throw new ForbiddenException('Error in creating user data');
+    }
   }
 }
