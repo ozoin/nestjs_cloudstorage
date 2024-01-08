@@ -24,7 +24,9 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Fullstack cloud storage applicaion for storing files into database with compression etc.
+Fully functional backend with authentication using JWT expirable tokens.
+Frontend using NextJS in progress...
 
 ## Installation
 
