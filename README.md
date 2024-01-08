@@ -22,9 +22,8 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-
-
-##Fullstack cloud storage applicaion for storing files into database with compression etc.
-##Fully functional backend with authentication using JWT expirable tokens.
-##Frontend using NextJS in progress...
+##Project description:
+Fullstack cloud storage applicaion for storing files into database with compression etc.
+Fully functional backend with authentication using JWT expirable tokens.
+Frontend using NextJS in progress...
 
