@@ -24,10 +24,10 @@
 
 <h1>Project description:</h1>
 <h2>
-Fullstack cloud storage applicaion for storing files into database with compression etc. 
-
-  
-Fully functional backend with authentication using JWT expirable tokens
-
-Frontend using NextJS in progress...
+Fullstack cloud storage applicaion for storing files into database with compression.
+-Fully functional authentification with JWT token
+-Interaction with database
+-Fully functional file uploading/CRUD.
+-And many more...
 </h2>
+<h1>DEMO: https://cloud-storage-nextjs.vercel.app</h1>
